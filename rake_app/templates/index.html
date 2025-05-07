@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RAKE Keyword Extractor</title>
+</head>
+<body>
+    <h1>Extractor de Palabras Clave - RAKE</h1>
+    <form action="/extract" method="post">
+        <textarea name="text" rows="10" cols="80" placeholder="Escribe o pega el texto aquí..."></textarea><br><br>
+        <input type="submit" value="Extraer palabras clave">
+    </form>
+
+    {% if keywords %}
+        <h2>Palabras clave:</h2>
+        <ul>
+            {% for score, phrase in keywords %}
+                <li><strong>{{ phrase }}</strong> (Score: {{ score }})</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>

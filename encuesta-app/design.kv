@@ -1,0 +1,207 @@
+<LoginScreen>:
+    GridLayout:
+        cols: 1
+        GridLayout:
+            cols: 1
+            padding: 15,15
+            spacing: 20,20
+            Label:
+                font_size: "20sp"
+                text: "User Login"
+            TextInput:
+                id: username
+                hint_text: "Username"
+            TextInput:
+                id: password
+                password: True
+                hint_text: "Password"
+            RelativeLayout:
+                Button:
+                    text: "Login"
+                    on_press: root.login(root.ids.username.text, root.ids.password.text)
+                    size_hint: 0.3, 0.5
+                    pos_hint: {'center_x':0.5, 'center_y':0.6}
+            Label:
+                id: login_wrong
+        GridLayout:
+            cols: 2
+            size_hint: 0.2, 0.2
+            padding: 10,10
+            spacing: 10,0
+            Button:
+                background_color: 1,1,1,0
+                opacity: 1 if self.state == 'normal' else 0.5
+                color: 0.1,0.7,1,1
+                text: "Forgot password?"
+            Button:
+                background_color: 1,1,1,0
+                opacity: 1 if self.state == 'normal' else 0.5
+                color: 0.1,0.7,1,1
+                text: "Sign Up"
+                on_press: root.sign_up()
+
+<DayToggleButton>:
+    size_hint_y: None
+    height: 50
+    font_size: '16sp'
+    group: None  # Esto hace que cada botón sea independiente
+    allow_no_selection: True
+    background_normal: ''
+    background_color: 
+        (0.95, 0.95, 0.95, 1) if self.state == 'normal' else (0.1, 0.7, 0.5, 1)
+    color: 
+        (0.2, 0.2, 0.2, 1) if self.state == 'normal' else (1, 1, 1, 1)
+    canvas.before:
+        Color:
+            rgba: (0.8, 0.8, 0.8, 1) if self.state == 'normal' else (0.1, 0.5, 0.8, 1)
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [10,]
+
+<SurveyScreen>:
+    current_user: ""
+    
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 20
+        spacing: 15
+        
+        Label:
+            text: "Mis Días Libres"
+            font_size: '24sp'
+            bold: True
+            size_hint_y: None
+            height: 50
+            color: 0.1, 0.5, 0.8, 1
+            halign: 'center'
+        
+        Label:
+            text: "Marca TODOS los días que tienes disponible (haz clic en cada día)"
+            font_size: '16sp'
+            size_hint_y: None
+            height: 30
+            halign: 'center'
+        
+        ScrollView:
+            GridLayout:
+                cols: 1
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: 10
+                padding: [0, 10, 0, 10]
+                
+                DayToggleButton:
+                    id: monday
+                    text: "Lunes"
+                    day_name: 'monday'
+                
+                DayToggleButton:
+                    id: tuesday
+                    text: "Martes"
+                    day_name: 'tuesday'
+                
+                DayToggleButton:
+                    id: wednesday
+                    text: "Miércoles"
+                    day_name: 'wednesday'
+                
+                DayToggleButton:
+                    id: thursday
+                    text: "Jueves"
+                    day_name: 'thursday'
+                
+                DayToggleButton:
+                    id: friday
+                    text: "Viernes"
+                    day_name: 'friday'
+        
+        Button:
+            text: "GUARDAR SELECCIÓN"
+            size_hint_y: None
+            height: 60
+            font_size: '18sp'
+            bold: True
+            background_color: 0.2, 0.6, 0.3, 1
+            on_press: root.save_availability()
+<ResultsScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 20
+        spacing: 20
+        
+        Label:
+            text: "Resultados de Disponibilidad"
+            font_size: "20sp"
+            size_hint_y: None
+            height: 40
+        
+        Image:
+            id: chart_image
+            size_hint_y: 0.6
+        
+        ScrollView:
+            Label:
+                id: summary_label
+                text_size: self.width, None
+                size_hint_y: None
+                height: self.texture_size[1]
+                padding: 10, 10
+        
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint_y: None
+            height: 50
+            spacing: 10
+            
+            Button:
+                text: "Editar Mi Disponibilidad"
+                on_press: root.back_to_survey()
+            
+            Button:
+                text: "Cerrar Sesión"
+                on_press: root.logout()
+
+<SignupScreen>:
+    GridLayout:
+        cols: 1
+        padding: 15,15
+        spacing: 20,20
+        Label:
+            font_size: "20sp"
+            text: "Sign up here"
+        TextInput:
+            id: username
+            hint_text: "Username"
+            size_hint: 0.3, 0.5
+        TextInput:
+            id: password
+            hint_text: "Password"
+            size_hint: 0.3, 0.5
+        RelativeLayout:
+            Button:
+                text: "Submit"
+                on_press: root.add_user(root.ids.username.text, root.ids.password.text)
+                size_hint: 0.3, 0.5
+                pos_hint: {'center_x':0.5, 'center_y':0.6}
+
+<SignupSuccessScreen>:
+    GridLayout:
+        cols: 1
+        Label:
+            text: "Registro exitoso!"
+        Button:
+            text: "Ir a la página de login"
+            on_press: root.login_page()
+
+<RootWidget>:
+    LoginScreen:
+        name: "login_screen"
+    SurveyScreen:
+        name: "survey_screen"
+    ResultsScreen:
+        name: "results_screen"
+    SignupScreen:
+        name: "sign_up_screen"
+    SignupSuccessScreen:
+        name: "sign_up_success"

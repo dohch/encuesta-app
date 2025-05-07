@@ -1,0 +1,38 @@
+{
+    "diego": {
+        "username": "diego",
+        "password": "1234",
+        "created": "2025-05-07 07-54-24",
+        "availability": {
+            "monday": true,
+            "tuesday": true,
+            "wednesday": true,
+            "thursday": false,
+            "friday": true
+        }
+    },
+    "francis": {
+        "username": "francis",
+        "password": "0987",
+        "created": "2025-05-07 08-26-44",
+        "availability": {
+            "monday": true,
+            "tuesday": true,
+            "wednesday": false,
+            "thursday": false,
+            "friday": false
+        }
+    },
+    "usuario": {
+        "username": "usuario",
+        "password": "usuario",
+        "created": "2025-05-07 13-29-28",
+        "availability": {
+            "monday": true,
+            "tuesday": true,
+            "wednesday": false,
+            "thursday": false,
+            "friday": false
+        }
+    }
+}
